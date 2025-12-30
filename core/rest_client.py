@@ -25,6 +25,24 @@ class RestClient():
         # requests.session()创建一个“有记忆的HTTP客户端”，让多次请求像同一用户在连续操作；若不用则每次请求都是一个全新的，无历史关联
         self.session = requests.session()
 
+    def get(self, url, **kwargs):
+        """
+        get请求（注意要有返回）
+        """
+        return self.request(url, "GET", **kwargs)
+
+    def post(self, url, data=None, json=None, **kwargs):
+        """
+        post请求（注意要有返回）
+        """
+        return self.request(url, "POST", data, json, **kwargs)
+
+    def delete(self,url,**kwargs):
+        """
+        delete请求（注意要有返回）
+        """
+        return self.request(url, "DELETE", **kwargs)
+
     def request(self, url, method, data=None, json=None, **kwargs):
         """
         封装request方法

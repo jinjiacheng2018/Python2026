@@ -17,7 +17,22 @@ BAST_PATH = os.path.dirname(os.path.dirname(__file__))
 CONFIG_FILE_PATH = os.path.join(BAST_PATH, "config", "setting.ini")
 base_url = data.load_ini(CONFIG_FILE_PATH)["host"]["base_url"]
 
+
 class User(RestClient):
 
     def __init__(self, base_url, **kwargs):
         super().__init__(base_url, **kwargs)
+
+    def list_all_users(self, **kwargs):
+        """
+        获取所有的用户
+        """
+        return self.get("/users", **kwargs)
+
+
+user = User(base_url)
+
+if __name__ == '__main__':
+    users = user.list_all_users()
+    for user in users:
+        print(user)

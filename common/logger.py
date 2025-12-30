@@ -12,7 +12,6 @@
 import logging
 import time
 import os
-import sys
 
 # 获取项目的根目录
 BASE_PATH = os.path.dirname(os.path.dirname(__file__))

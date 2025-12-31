@@ -29,6 +29,12 @@ class User(RestClient):
         """
         return self.get("/users", **kwargs)
 
+    def list_user_by_name(self, user_name, **kwargs):
+        """
+        根据名字获取用户
+        """
+        return self.get(f"/users/{user_name}", **kwargs)
+
 
 user = User(base_url)
 

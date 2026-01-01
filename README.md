@@ -22,7 +22,7 @@ Python2026/
 │   ├── __init__.py
 │   └── logger.py
 ├── main.py           # 主程序入口
-├── py.test.ini       # pytest配置
+├── py.unittest.ini       # pytest配置
 ├── requirements.txt  # 依赖列表
 ├── README.md         # 项目说明
 └── .gitignore        # Git忽略配置

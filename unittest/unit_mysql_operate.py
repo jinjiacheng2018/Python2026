@@ -2,7 +2,7 @@
 # -*- coding: UTF-8 -*-
 '''
 @Project    ：Python2026 
-@File       ：test_mysql_operate.py
+@File       ：unit_mysql_operate.py
 @IDE        ：PyCharm 
 @Date       ：2025/12/27 16:08:56 
 @Author     ：JinJiacheng
@@ -11,7 +11,7 @@
 from common.mysql_operate import mysql_db
 
 
-def test_mysql_util():
+def mysql_util():
     """ 测试mysql工具 """
     # 增
     insert_sql = "INSERT INTO emp VALUES (7789, 'SCOTT-2', 'ANALYST', 7566, '1982-12-09', 3000.00, NULL, 20);";
@@ -30,3 +30,6 @@ def test_mysql_util():
     data = mysql_db.select_db(select_sql)
     for i in data:
         print(i)
+
+if __name__ == '__main__':
+    mysql_util()

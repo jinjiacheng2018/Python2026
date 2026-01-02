@@ -77,6 +77,9 @@ class User(RestClient):
         请求头：Content-Type: application/json
         请求Body：{"admin_user": "wintest", "token": "f54f9d6ebba2c75d45ba00a8832cb593"}
         """
+        # 注意，如果delete方法与父类方法同名，则需要使用super()
+        # super().delete(f"/delete/user/{user_name}", **kwargs)
         return self.post(f"/delete/user/{user_name}", **kwargs)
+
 
 user = User(base_url)

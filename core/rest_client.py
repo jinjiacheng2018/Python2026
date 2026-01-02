@@ -93,7 +93,7 @@ class RestClient():
 
     def request_log(self, url, method, data=None, json=None, headers=None, params=None, files=None, cookies=None):
         """
-        请求方法日志打印方法
+        请求方法日志打印方法（使用if判断：None / "" / False 都不会打印）
         :param url: 请求url
         :param method: 请求方法
         :param data: 表单请求参数
@@ -104,11 +104,14 @@ class RestClient():
         :param cookies: 请求cookies
         :return: None
         """
-        logger.info(f"【请求url】：{url}")
-        logger.info(f"【请求方法】：{method}")
-        logger.info(f"【请求头】：{headers}")
-        logger.info(f"【表单参数】：{data}")
-        logger.info(f"【JSON参数】：{json}")
-        logger.info(f"【其他参数】：{params}")
-        logger.info(f"【请求文件】：{files}")
-        logger.info(f"【请求cookies】：{cookies}")
+        logger.info("------------------------------------请求开始------------------------------------")
+        if url: logger.info(f"【请求url】：{url}")
+        if method: logger.info(f"【请求方法】：{method}")
+        if headers: logger.info(f"【请求头】：{headers}")
+        if data: logger.info(f"【表单参数】：{data}")
+        if json: logger.info(f"【JSON参数】：{json}")
+        if params:
+            logger.info(f"【其他参数】：{params}")
+            logger.info(f"【请求文件】：{files}")
+            logger.info(f"【请求cookies】：{cookies}")
+        logger.info("------------------------------------请求结束------------------------------------")

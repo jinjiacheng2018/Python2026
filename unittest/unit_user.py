@@ -20,12 +20,12 @@ def register():
     注册用户
     """
     user_json = {
-        "username": "纪晓芙",
+        "username": "成昆",
         "password": "123456",
         "role": 2,
         "sex": "0",
-        "telephone": "15000000004",
-        "address": "上海"
+        "telephone": "15000000006",
+        "address": "上海迪士尼"
     }
     headers = {
         "Content-Type": "application/json"
@@ -67,5 +67,19 @@ def update():
     print(user.update(user_id=4, headers=headers, json=user_json).json())
 
 
+def delete():
+    """
+    删除用户
+    """
+    user_json = {
+        "admin_user": "张无忌",
+        "token": f"{login()}"
+    }
+    headers = {
+        "Content-Type": "application/json"
+    }
+    print(user.delete(user_name="成昆", headers=headers, json=user_json).json())
+
 if __name__ == '__main__':
-    update()
+    register()
+    delete()

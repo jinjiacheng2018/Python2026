@@ -69,5 +69,14 @@ class User(RestClient):
         """
         return self.put(f"/update/user/{user_id}", **kwargs)
 
+    def delete(self, user_name: str, **kwargs):
+        """
+        删除用户
+        请求方式：POST
+        请求地址：http://127.0.0.1:9999/delete/user/test
+        请求头：Content-Type: application/json
+        请求Body：{"admin_user": "wintest", "token": "f54f9d6ebba2c75d45ba00a8832cb593"}
+        """
+        return self.post(f"/delete/user/{user_name}", **kwargs)
 
 user = User(base_url)

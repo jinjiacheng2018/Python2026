@@ -4,6 +4,8 @@
 
 参考测试接口源码：https://github.com/jinjiacheng2018/flaskDemo
 参考框架搭建源码：https://github.com/jinjiacheng2018/pytestDemo
+
+参考博客文章：https://www.cnblogs.com/wintest/p/13423231.html
 ```
 
 # 项目结构说明
@@ -16,6 +18,7 @@ Python2026/
 ├── core/             # requests请求方法封装、关键字返回结果类
 ├── data/             # 数据文件
 ├── logs/             # 日志文件
+├── operation/        # 自定义关键字
 ├── report/           # 测试报告
 ├── testcase/         # 测试用例
 ├── utils/            # 工具函数
@@ -26,6 +29,30 @@ Python2026/
 ├── requirements.txt  # 依赖列表
 ├── README.md         # 项目说明
 └── .gitignore        # Git忽略配置
+```
+
+# 框架搭建步骤
+```text
+1. 创建项目的各个包、文件夹
+2. 搭建基础的框架
+    - a) config: 添加mysql.ini、setting.ini配置文件
+    - b) common: 添加基础的工具类
+        - logger.py: 首先添加日志框架，构建基础的日志打印
+        - read_data.py: 添加数据读取模块，读取配置文件
+        - mysql_operate.py: 添加MySQL数据库操作模块，查询、插入、更新、删除
+    - c) core: 添加rest_client.py模块，用于reques基础的请求方法封装、关键字返回结果类
+    - d) api: 添加User.py模块并集成封装的接口类，进一步封装接口API
+ 3. todo
+```
+
+# 关键字封装说明
+```text
+关键字应该是具有一定业务意义的，在封装关键字的时候，可以通过调用多个Python接口来完成。
+在某些情况下，比如测试一个充值接口的时候，在充值后可能需要调用查询接口得到最新账户余额，来判断查询结果与预期结果是否一致，那么可以这样来进行测试：
+
+1, 首先，可以把 充值-查询 的操作封装为一个关键字，在这个关键字中依次调用充值和查询的接口，并可以自定义关键字的返回结果。
+2, 接着，在编写测试用例的时候，直接调用关键字来进行测试，这时就可以拿到关键字返回的结果，那么断言的时候，就可以直接对关键字返回结果进行断言。
+
 ```
 
 # 测试系统说明

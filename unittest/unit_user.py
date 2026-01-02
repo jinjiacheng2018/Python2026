@@ -38,24 +38,33 @@ def login():
     登录用户
     """
     data = {
-        "username": "纪晓芙",
+        "username": "张无忌",
         "password": "123456"
     }
     headers = {
         "Content-Type": "application/x-www-form-urlencoded"
     }
-    print(user.login(data=data, headers=headers).json())
+    response = user.login(data=data, headers=headers)
+    print(response.json())
+    return response.json()["login_info"]["token"]
 
 
 def update():
     """
     修改用户信息
     """
-    user_json = {}
+    user_json = {
+        "admin_user": "张无忌",
+        "password": "123456",
+        "token": f"{login()}",
+        "sex": "1",
+        "address": "广州市天河区",
+        "telephone": "13500010003"
+    }
     headers = {
         "Content-Type": "application/json"
     }
-    user.update(4, headers=headers, json=user_json)
+    print(user.update(user_id=4, headers=headers, json=user_json).json())
 
 
 if __name__ == '__main__':

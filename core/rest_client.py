@@ -37,7 +37,13 @@ class RestClient():
         """
         return self.request(url, "POST", data, json, **kwargs)
 
-    def delete(self,url,**kwargs):
+    def put(self, url, data=None, **kwargs):
+        """
+        put请求（注意要有返回）
+        """
+        return self.request(url, "PUT", data, **kwargs)
+
+    def delete(self, url, **kwargs):
         """
         delete请求（注意要有返回）
         """
@@ -101,8 +107,8 @@ class RestClient():
         logger.info(f"【请求url】：{url}")
         logger.info(f"【请求方法】：{method}")
         logger.info(f"【请求头】：{headers}")
-        logger.info(f"【请求表单】：{data}")
-        logger.info(f"【请求json体】：{json}")
-        logger.info(f"【请求参数】：{params}")
+        logger.info(f"【表单参数】：{data}")
+        logger.info(f"【JSON参数】：{json}")
+        logger.info(f"【其他参数】：{params}")
         logger.info(f"【请求文件】：{files}")
         logger.info(f"【请求cookies】：{cookies}")

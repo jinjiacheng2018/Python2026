@@ -67,7 +67,7 @@ class User(RestClient):
         请求头：Content-Type: application/json
         请求Body：{"admin_user": "wintest", "token": "f54f9d6ebba2c75d45ba00a8832cb593", "sex": "1", "address": "广州市天河区", "password": "12345678", "telephone": "13500010003"}
         """
-        return self.post(f"/update/user/{user_id}", **kwargs)
+        return self.put(f"/update/user/{user_id}", **kwargs)
 
 
 user = User(base_url)

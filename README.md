@@ -40,8 +40,15 @@ Python2026/
         - logger.py: 首先添加日志框架，构建基础的日志打印
         - read_data.py: 添加数据读取模块，读取配置文件
         - mysql_operate.py: 添加MySQL数据库操作模块，查询、插入、更新、删除
-    - c) core: 添加rest_client.py模块，用于reques基础的请求方法封装、关键字返回结果类
+    - c) core: 
+        - 添加rest_client.py模块，用于reques基础的请求方法封装、关键字返回结果类
+        - 添加result.py模块，封装关键字返回结果类
     - d) api: 添加User.py模块并集成封装的接口类，进一步封装接口API
+    - e) operation: 添加User关键字封装模块，封装关键字
+    - f) data: 准备测试数据
+        - base_data.yaml: 添加基础的准备数据
+    - g) testcase: 添加测试用例
+        - config.py: 添加测试用例配置文件(基础配置文件)
  3. todo
 ```
 

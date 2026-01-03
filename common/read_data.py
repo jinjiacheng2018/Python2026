@@ -43,13 +43,18 @@ class ReadFileData():
         data = dict(config._sections)
         return data
 
+    def load_yaml(self, file_path):
+        """
+        加载yaml配置文件
+        :param file_path: 文件路径
+        :return: data
+        """
+        logger.info(f"【加载配置文件】：{file_path} ")
+        with open(file_path, encoding="UTF-8") as f:
+            # 使用yaml.safe_load()方法加载yaml文件，不是用load()方法避免yaml被反序列化存在漏洞
+            data = yaml.safe_load(f)
+        return data
+
+
 # 初始化实例
 data = ReadFileData()
-
-if __name__ == '__main__':
-    # 获取项目的根目录
-    BASE_PATH = os.path.dirname(os.path.dirname(__file__))
-
-    # 组装mysql配置文件的路径
-    MYSQL_CONFIG = os.path.join(BASE_PATH, "config", "mysql.ini")
-    data.load_ini(file_path=MYSQL_CONFIG)

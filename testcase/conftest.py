@@ -7,3 +7,63 @@
 '''
 
 # todo：测试用例执行之前，先执行conftest.py中的代码（接下来要写主文件的配置信息）
+
+import os
+
+import allure
+import pytest
+from common.read_data import data
+from common.logger import logger
+from api.User import user
+
+BASE_PATH = os.path.dirname(os.path.dirname(__file__))
+
+
+def get_data(yaml_file_name):
+    """
+    定义方法获取yaml文件数据
+    """
+    try:
+        yaml_file_path = os.path.join(BASE_PATH, "data", yaml_file_name)
+        yaml_data = data.load_yaml(file_path=yaml_file_path)
+    except Exception as e:
+        pytest.skip("没有找到yaml文件")
+    else:
+        return yaml_data
+
+
+base_data = get_data("base_data.yaml")
+
+
+@allure.step("前置步骤 ==>> 清理数据")
+def step_first():
+    logger.info("*****************************")
+    logger.info("前置步骤开始 ==>> 清理数据")
+
+
+@allure.step("后置步骤 ==>> 清理数据")
+def step_last():
+    logger.info("后置步骤开始 ==>> 清理数据")
+
+
+@allure.step("登录")
+def step_login(username, password):
+    logger.info(f"管理员【{username}】登录。")
+
+
+@pytest.fixture(scope="session")
+def login_fixture():
+    username = base_data["init_admin_user"]["username"]
+    passwodd = base_data["init_admin_user"]["password"]
+
+    user_data = {
+        "username": username,
+        "password": passwodd
+    }
+
+    headers = {
+        "Content-Type": "application/x-www-form-urlencoded"
+    }
+    response = user.login(data=user_data, headers=headers)
+    step_login(username, passwodd)
+    yield response.json()

@@ -3,7 +3,7 @@
 @File       ：result_base.py
 @Date       ：2026/1/2 23:39:02
 @Author     ：JinJiacheng
-@description：定义自定义的返回结果类，主要用于自定义关键字返回结果。（定义标准的返回结果类）
+@description：定义自定义的返回结果类，主要用于自定义关键字返回结果。（例如：java开发中自定的标准json返回对象）
 '''
 
 
@@ -25,5 +25,26 @@ class ResultBase:
         """
         return (
             f"<ResultBase success={self.success}, code={self.code}, "
-            f"msg={self.msg}, data={self.data}>"
+            f"msg={self.msg}, data={self.data}>, "
+        )
+
+    @classmethod
+    def from_response(cls, response):
+        """
+        定义一个类方法：从requests.Response构造 ResultBase
+        """
+        try:
+            body = response.json()
+        except Exception:
+            body = None
+
+        # 业务成功判断逻辑（可按后端接口的编码、规范调整）
+        success = bool(body and body.get("code") == 0)
+
+        return cls(
+            success=success,
+            code=body.get("code") if body else response.status_code,
+            msg=body.get("msg") if body else response.reason,
+            data=body.get("data") if body else None,
+            response=response
         )

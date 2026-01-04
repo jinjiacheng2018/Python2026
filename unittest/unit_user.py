@@ -1,18 +1,19 @@
 from api.User import user
+from common.logger import logger
 
 
 def search_all_users():
     """
     查询所有用户
     """
-    print(user.list_all_users().json())
+    print(user.list_all_users().data)
 
 
 def search_user_by_name():
     """
     根据名字查询用户
     """
-    print(user.list_user_by_name("周芷若").json())
+    print(user.list_user_by_name("周芷若").data)
 
 
 def register():
@@ -30,7 +31,7 @@ def register():
     headers = {
         "Content-Type": "application/json"
     }
-    print(user.register(headers=headers, json=user_json).json())
+    print(user.register(headers=headers, json=user_json))
 
 
 def login():
@@ -44,9 +45,10 @@ def login():
     headers = {
         "Content-Type": "application/x-www-form-urlencoded"
     }
-    response = user.login(data=data, headers=headers)
-    print(response.json())
-    return response.json()["login_info"]["token"]
+    result_base = user.login(data=data, headers=headers)
+    print(result_base)
+    token = result_base.response.json()["login_info"]["token"]
+    return token
 
 
 def update():
@@ -64,7 +66,7 @@ def update():
     headers = {
         "Content-Type": "application/json"
     }
-    print(user.update(user_id=4, headers=headers, json=user_json).json())
+    print(user.update(user_id=4, headers=headers, json=user_json))
 
 
 def delete():
@@ -78,8 +80,13 @@ def delete():
     headers = {
         "Content-Type": "application/json"
     }
-    print(user.delete(user_name="成昆", headers=headers, json=user_json).json())
+    print(user.delete(user_name="成昆", headers=headers, json=user_json))
+
 
 if __name__ == '__main__':
+    # search_all_users()
+    # search_user_by_name()
+    # login()
+    # update()
     register()
     delete()

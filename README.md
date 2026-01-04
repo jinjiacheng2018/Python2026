@@ -85,6 +85,19 @@ code: 123456
 📌 这是最权威的版本来源
 ```
 
+# 关于封装request的好处
+```text
+公众号内容：https://mp.weixin.qq.com/s/jU_3Ag8p2LAlMkBjFzX_fw
+
+| 目标           | 对应封装能力                          |
+| --------      | ------------------------------- |
+| 减少重复代码     | 统一 request 入口                   |
+| 提升健壮性      | 统一异常处理 + 重试                     |
+| 降低环境切换成本  | base_url / headers / token 集中管理 |
+| 适配测试生态    | 日志、断言、allure、pytest             |
+| 降低使用门槛     | 屏蔽 requests 细节，提供业务级接口          |
+
+```
 
 # 参考地址
 https://mp.weixin.qq.com/s/tp-CXm6adA0z9CrubpiEhA

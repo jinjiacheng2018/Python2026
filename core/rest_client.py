@@ -10,10 +10,22 @@
 '''
 import requests
 import json as complexjson
+
+from requests import RequestException
+
 from common.logger import logger
+from core.result_base import ResultBase
 
 
 class RestClient():
+    """
+        requests 二次封装
+        目标：
+        1. 统一请求入口
+        2. 统一异常处理
+        3. 自动拼接 base_url
+        4. 支持 session / token
+    """
 
     def __init__(self, base_url):
         """
@@ -66,30 +78,31 @@ class RestClient():
         cookies = dict(**kwargs).get("params")
         self.request_log(url, method, data, json, headers, params, files, cookies)
 
-        if method == "GET":
-            return self.session.get(url, **kwargs)
-        if method == "POST":
-            return self.session.post(url, data, json, **kwargs)
-        if method == "DELETE":
-            return self.session.delete(url, **kwargs)
-        if method == "PUT":
-            if json is not None:
-                # PUT 和 PATCH 中没有提供直接使用json参数的方法，因此需要用data来传入
-                data = complexjson.dumps(json)
-            return self.session.put(url, data, **kwargs)
-        if method == "PATCH":
-            if json is not None:
-                data = complexjson.dumps(json)
-            return self.session.patch(url, data, **kwargs)
-
-    # 后续可以考虑在初始化时登录，将token加入到系统中
-    def login(self, username, password):
-        resp = self.session.post(
-            self.base_url + '/login',
-            json={"username": username, "password": password}
-        )
-        token = resp.json()['token']
-        self.session.headers['Authorization'] = f'Bearer {token}'
+        try:
+            if method == "GET":
+                return ResultBase.from_response(self.session.get(url, **kwargs))
+            if method == "POST":
+                return ResultBase.from_response(self.session.post(url, data, json, **kwargs))
+            if method == "DELETE":
+                return ResultBase.from_response(self.session.delete(url, **kwargs))
+            if method == "PUT":
+                if json is not None:
+                    # PUT 和 PATCH 中没有提供直接使用json参数的方法，因此需要用data来传入
+                    data = complexjson.dumps(json)
+                return ResultBase.from_response(self.session.put(url, data, **kwargs))
+            if method == "PATCH":
+                if json is not None:
+                    data = complexjson.dumps(json)
+                return ResultBase.from_response(self.session.patch(url, data, **kwargs))
+        except TimeoutError as e:
+            logger.error(f"请求超时，异常信息：{e}")
+            return ResultBase(success=False, msg="请求超时", response=None)
+        except ConnectionError as e:
+            logger.error(f"连接失败，异常信息：{e}")
+            return ResultBase(success=False, msg="连接错误", response=None)
+        except RequestException as e:
+            logger.error(f"请求异常，异常信息：{e}")
+            return ResultBase(success=False, msg="请求异常", response=None)
 
     def request_log(self, url, method, data=None, json=None, headers=None, params=None, files=None, cookies=None):
         """

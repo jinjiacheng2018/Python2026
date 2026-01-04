@@ -53,6 +53,9 @@ def step_login(username, password):
 
 @pytest.fixture(scope="session")
 def login_fixture():
+    """
+    登录
+    """
     username = base_data["init_admin_user"]["username"]
     passwodd = base_data["init_admin_user"]["password"]
 
@@ -66,4 +69,6 @@ def login_fixture():
     }
     response = user.login(data=user_data, headers=headers)
     step_login(username, passwodd)
+
+    # yield前是setup，yield后是teardown。yield 的值就是注入到测试用例中的fixture返回值
     yield response.json()

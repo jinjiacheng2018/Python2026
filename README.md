@@ -25,7 +25,7 @@ Python2026/
 │   ├── __init__.py
 │   └── logger.py
 ├── main.py           # 主程序入口
-├── py.unittest.ini       # pytest配置
+├── py.demotest.ini       # pytest配置
 ├── requirements.txt  # 依赖列表
 ├── README.md         # 项目说明
 └── .gitignore        # Git忽略配置
@@ -49,6 +49,9 @@ Python2026/
         - base_data.yaml: 添加基础的准备数据
     - g) testcase: 添加测试用例
         - config.py: 添加测试用例配置文件(基础配置文件)
+        - api_test
+            - config.py: 添加测试用例配置文件(基础配置文件)
+            - test_01_get_user_info.py: 添加测试用例
  3. todo
 ```
 

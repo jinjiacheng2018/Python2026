@@ -28,7 +28,7 @@ class TestGetUserInfo():
     @allure.story("用例：获取用户信息模块")
     @allure.description("获取所有用户的用例")
     @pytest.mark.single
-    @pytest.mark.parametrize("except_result", "except_code", "except_msg",
+    @pytest.mark.parametrize("except_result,except_code,except_msg",
                              api_data["test_get_all_user_info"])
     def test_get_all_user_info(self, except_result, except_code, except_msg):
         """获取所有用户的用例"""
@@ -42,10 +42,7 @@ class TestGetUserInfo():
         assert except_msg in result.msg
         logger.info("******************** 结束执行用例 ********************")
 
+
+
 if __name__ == "__main__":
-    pytest.main([
-        "-s",
-        "-v",
-        "--disable-warnings",
-        "testcase/api_test/test_01_get_user_info.py"
-    ])
+    pytest.main(["-q", "-s", "test_01_get_user_info.py"])

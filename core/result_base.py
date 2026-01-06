@@ -8,7 +8,7 @@
 
 
 class ResultBase:
-    def __init__(self, success: bool = False, msg: str = None, error: str = None, response=None, data=None, code=None):
+    def __init__(self, success: bool = False, msg: str = None, response=None, data=None, code=None):
         """
         关键字执行结果基类，error是给测试看的，msg是接口的标准返回
         """
@@ -16,7 +16,6 @@ class ResultBase:
         self.success = success  # 接口关键字是否成功
         self.data = data  # 业务数据
         self.msg = msg  # 接口返回的 msg
-        self.error = error  # 错误信息（关键字级）
         self.response = response  # 原始requests.Response对象
 
     def __repr__(self):

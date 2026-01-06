@@ -2,7 +2,7 @@
 # -*- coding: UTF-8 -*-
 '''
 @Project    ：Python2026 
-@File       ：unit_mysql_operate.py
+@File       ：demo_mysql_operate.py
 @IDE        ：PyCharm 
 @Date       ：2025/12/27 16:08:56 
 @Author     ：JinJiacheng

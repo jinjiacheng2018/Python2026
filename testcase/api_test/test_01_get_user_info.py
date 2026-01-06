@@ -6,11 +6,11 @@
 @description：描述信息
 '''
 
-import pytest
 import allure
-from common.logger import logger
+import pytest
+
+from operation.User import *
 from testcase.conftest import api_data
-from operation.User import get_all_users_info
 
 
 @allure.step("步骤1 ==>> 获取所有用户信息")
@@ -25,23 +25,37 @@ def step_2(username):
 
 class TestGetUserInfo():
 
-    @allure.story("用例：获取用户信息模块")
+    @allure.story("【01】用户管理模块")
     @allure.description("获取所有用户的用例")
     @pytest.mark.single
-    @pytest.mark.parametrize("except_result,except_code,except_msg",
-                             api_data["test_get_all_user_info"])
+    @pytest.mark.parametrize("except_result,except_code,except_msg", api_data["test_get_all_user_info"])
     def test_get_all_user_info(self, except_result, except_code, except_msg):
         """获取所有用户的用例"""
-        logger.info("******************** 开始执行用例 ********************")
+        logger.info("\n******************** 开始执行用例 ********************")
         step_1()
         result = get_all_users_info()
         assert result.response.status_code == 200
-        assert result.success == except_result, result.error
+        assert result.success == except_result, logger.error("用例执行失败")
         logger.info(f"code ==>> 期望结果是：{except_code}，实际结果是：{result.code}")
         assert result.code == except_code
         assert except_msg in result.msg
         logger.info("******************** 结束执行用例 ********************")
 
+    @allure.story("【01】用户管理模块")
+    @allure.description("获取某个用户的用例")
+    @pytest.mark.single
+    @pytest.mark.parametrize("username,except_result,except_code,except_msg", api_data["test_get_one_user_info"])
+    def test_get_one_user_info(self, username, except_result, except_code, except_msg):
+        """获取某个用户的用例"""
+        logger.info("\n******************** 开始执行用例 ********************")
+        step_1()
+        result = get_one_user_info(username)
+        assert result.response.status_code == 200
+        assert result.success == except_result, logger.error("用例执行失败")
+        logger.info(f"code ==>> 期望结果是：{except_code}，实际结果是：{result.code}")
+        assert result.code == except_code
+        assert except_msg in result.msg
+        logger.info("******************** 结束执行用例 ********************")
 
 
 if __name__ == "__main__":

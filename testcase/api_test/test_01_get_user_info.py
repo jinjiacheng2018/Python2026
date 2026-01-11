@@ -23,9 +23,15 @@ def step_2(username):
     logger.info(f"步骤2 ==>> 获取【{username}】的信息")
 
 
+# @allure.severity 标注测试报告中的“严重级别（Severity）”，用于给测试用例打重要性标签，方便在报告中分类、筛选、统计和决策。
+# @allure.epic 用于描述测试用例所属的大模块，比如：用户模块、订单模块等等。
+@allure.severity(allure.severity_level.NORMAL)
+@allure.epic("xxx管理系统")
+@allure.feature("用户管理")
 class TestGetUserInfo():
 
-    @allure.story("【01】用户管理模块")
+    @allure.title("case_title：获取用户信息")
+    @allure.story("用例：获取所有用户")
     @allure.description("获取所有用户的用例")
     @pytest.mark.single
     @pytest.mark.parametrize("except_result,except_code,except_msg", api_data["test_get_all_user_info"])
@@ -41,7 +47,8 @@ class TestGetUserInfo():
         assert except_msg in result.msg
         logger.info("******************** 结束执行用例 ********************")
 
-    @allure.story("【01】用户管理模块")
+    @allure.title("case_title：根据用户名获取某个用户")
+    @allure.story("用例：根据用户名获取某个用户")
     @allure.description("获取某个用户的用例")
     @pytest.mark.single
     @pytest.mark.parametrize("username,except_result,except_code,except_msg", api_data["test_get_one_user_info"])
@@ -59,4 +66,5 @@ class TestGetUserInfo():
 
 
 if __name__ == "__main__":
-    pytest.main(["-q", "-s", "test_01_get_user_info.py"])
+    # pytest.main(["-q", "-s", "--alluredir=./report/allure-results", "test_01_get_user_info.py"])
+    pytest.main(["test_01_get_user_info.py", "-sq", "--alluredir", "./allure-results"])

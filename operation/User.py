@@ -40,3 +40,33 @@ def get_one_user_info(username: str) -> ResultBase:
 
     # 关键字中根据项目要求是否需要返回业务数据，若不需求则删除该行代码
     return result
+
+
+def register_user(username: str, password: str, sex: str, telephone: str, address: str) -> ResultBase:
+    """
+    注册用户
+    :param username: 用户名
+    :param password: 密码
+    :param sex: 性别
+    :param telephone: 手机号
+    :param address: 地址
+    :return: 自定义个关键字返回结果
+    """
+    user_json = {
+        "username": username,
+        "password": password,
+        "sex": sex,
+        "telephone": telephone,
+        "address": address
+    }
+    headers = {
+        "Content-Type": "application/json"
+    }
+
+    result = user.register(data=user_json, headers=headers)
+    if result.code == 0:
+        result.success = True
+    else:
+        logger.error("【注册用户失败】")
+
+    return result

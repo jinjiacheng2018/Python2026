@@ -10,7 +10,7 @@ import pytest
 from common.logger import logger
 import allure
 
-from testcase.conftest import api_data
+from testcases.conftest import api_data
 from operation.User import register_user
 
 

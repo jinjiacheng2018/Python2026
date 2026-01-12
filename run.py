@@ -17,7 +17,7 @@ os.makedirs(ALLURE_RESULTS, exist_ok=True)
 pytest.main([
     "-s",
     "--alluredir=" + ALLURE_RESULTS,
-    "testcase/api_test/test_01_get_user_info.py"
+    "testcases/api_test/test_01_get_user_info.py"
 
     # 执行用例后，进入到报告的目录下，生成allure报告
     # cd /d/MyWorkspaces/Python2026/report

@@ -20,7 +20,7 @@ Python2026/
 ├── logs/             # 日志文件
 ├── operation/        # 自定义关键字
 ├── report/           # 测试报告
-├── testcase/         # 测试用例
+├── testcases/         # 测试用例
 ├── utils/            # 工具函数
 │   ├── __init__.py
 │   └── logger.py

@@ -7,7 +7,7 @@
 '''
 import pytest
 
-from testcase.conftest import api_data
+from testcases.conftest import api_data
 
 
 @pytest.fixture(scope="function")

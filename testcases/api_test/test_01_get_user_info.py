@@ -10,7 +10,7 @@ import allure
 import pytest
 
 from operation.User import *
-from testcase.conftest import api_data
+from testcases.conftest import api_data
 
 
 @allure.step("步骤1 ==>> 获取所有用户信息")

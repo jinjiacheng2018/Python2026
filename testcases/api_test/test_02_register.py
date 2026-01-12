@@ -30,7 +30,8 @@ class TestUserRegister():
 
     @allure.story("用例：注册用户")
     @allure.description("测试用户注册")
-    @pytest.mark.singn
+    @pytest.mark.single
+    # @pytest.mark.xfail(reason="这个功能暂时有 bug")
     @pytest.mark.parametrize("username, password, telephone, sex, address,except_result, except_code, except_msg",
                              api_data["test_register_user"])
     def test_register_user(self, username, password, telephone, sex, address, except_result, except_code, except_msg):

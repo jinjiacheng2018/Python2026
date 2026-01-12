@@ -66,5 +66,4 @@ class TestGetUserInfo():
 
 
 if __name__ == "__main__":
-    # pytest.main(["-q", "-s", "--alluredir=./report/allure-results", "test_01_get_user_info.py"])
-    pytest.main(["test_01_get_user_info.py", "-sq", "--alluredir", "./allure-results"])
+    pytest.main(["-q", "-s", "test_01_get_user_info.py"])

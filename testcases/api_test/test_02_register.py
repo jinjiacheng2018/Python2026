@@ -28,7 +28,8 @@ class TestUserRegister():
     用户注册模块
     """
 
-    @allure.story("用例：注册用户")
+    @allure.title("注册用户")
+    @allure.story("功能：注册用户")
     @allure.description("测试用户注册")
     @pytest.mark.single
     # @pytest.mark.xfail(reason="这个功能暂时有 bug")

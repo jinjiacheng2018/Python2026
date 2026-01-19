@@ -70,3 +70,27 @@ def register_user(username: str, password: str, sex: str, telephone: str, addres
         logger.error("【注册用户失败】")
 
     return result
+
+
+def login_user(username: str, password: str) -> ResultBase:
+    """
+    登录用户
+    :param username: 用户名
+    :param password: 密码
+    :return: 自定义个关键字返回结果
+    """
+    user_json = {
+        "username": username,
+        "password": password
+    }
+    headers = {
+        "Content-Type": "application/x-www-form-urlencoded"
+    }
+
+    result = user.login(data=user_json, headers=headers)
+    if result.code == 0:
+        result.success = True
+    else:
+        logger.error("【注册用户失败】")
+
+    return result

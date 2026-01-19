@@ -42,7 +42,7 @@ def app():
         # 命令行没有传参是此逻辑不仅如此，例：python app.py testcases/test_01_get_user_info.py
         pytest_args += sys.argv[1:]
     # else:
-    #     # 没有时指定测试文件
+    #     # 若需要指定某个用例文件时：将else放开
     #     pytest_args += ["testcases/api_test/test_01_get_user_info.py"]
 
     # 5、调用 pytest.main 执行

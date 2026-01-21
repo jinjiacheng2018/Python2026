@@ -43,7 +43,7 @@ def app():
         pytest_args += sys.argv[1:]
     # else:
     #     # 若需要指定某个用例文件时：将else放开
-    #     pytest_args += ["testcases/api_test/test_01_get_user_info.py"]
+    #     pytest_args += ["testcases/api_test/test_02_register.py"]
 
     # 5、调用 pytest.main 执行
     exit_code = pytest.main(pytest_args)

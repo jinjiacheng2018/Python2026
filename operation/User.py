@@ -63,7 +63,7 @@ def register_user(username: str, password: str, sex: str, telephone: str, addres
         "Content-Type": "application/json"
     }
 
-    result = user.register(data=user_json, headers=headers)
+    result = user.register(json=user_json, headers=headers)
     if result.code == 0:
         result.success = True
     else:
@@ -92,5 +92,35 @@ def login_user(username: str, password: str) -> ResultBase:
         result.success = True
     else:
         logger.error("【注册用户失败】")
+
+    return result
+
+
+def update_user(id: str, admin_user: str, password: str, sex: str, telephone: str, address: str,
+                token: str) -> ResultBase:
+    """
+    修改用户信息
+    :param id: 用户id
+    :param admin_user: 管理员用户
+    :param password: 密码
+    :param sex: 性别
+    :param telephone: 手机号
+    :param address: 地址
+    :param token: 令牌
+    :return: 自定义个关键字返回结果
+    """
+    user_json = {
+        "admin_user": admin_user,
+        "password": password,
+        "token": token,
+        "sex": sex,
+        "address": address,
+        "telephone": telephone
+    }
+    headers = {
+        "Content-Type": "application/json"
+    }
+
+    result = user.update(user_id=id, json=user_json, headers=headers)
 
     return result

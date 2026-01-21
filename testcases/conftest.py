@@ -47,7 +47,7 @@ def step_last():
 
 
 @allure.step("登录")
-def step_login(username, password):
+def step_login(username):
     logger.info(f"管理员【{username}】登录。")
 
 
@@ -67,11 +67,11 @@ def login_fixture():
     headers = {
         "Content-Type": "application/x-www-form-urlencoded"
     }
-    response = user.login(data=user_data, headers=headers)
-    step_login(username, passwodd)
+    result = user.login(data=user_data, headers=headers)
+    step_login(username)
 
     # yield前是setup，yield后是teardown。yield 的值就是注入到测试用例中的fixture返回值
-    yield response.json()
+    yield result.response.json()
 
 
 @pytest.fixture(scope="session")
@@ -88,6 +88,7 @@ def insert_delete_user():
     step_last()
     logger.info(f"【清理用户操作：清理用户，并执行后置SQL：{del_sql}】")
 
+
 @pytest.fixture(scope="session")
 def delete_register_user():
     """注册用户前，先删除数据，用例执行后要再次清理数据"""
@@ -99,6 +100,7 @@ def delete_register_user():
     mysql_db.execute_db(del_sql)
     step_last()
     logger.info(f"【注册用户操作：清理用户，并执行后置SQL：{del_sql}】")
+
 
 @pytest.fixture(scope="session")
 def update_user_telephone():

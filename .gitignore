@@ -22,7 +22,8 @@ parts/
 sdist/
 var/
 logs/
-report/
+report/allure-results
+report/allure-html
 wheels/
 pip-wheel-metadata/
 share/python-wheels/
